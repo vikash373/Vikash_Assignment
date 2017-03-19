@@ -1,0 +1,35 @@
+package org.sel.quiz.utills;
+
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+
+public class ApplicationClass {
+	
+	public WebDriver driver;
+	private static String urlname = "https://gmail.com";
+	
+	//Method to Launch firefox browser
+	@BeforeSuite
+	public  WebDriver LaunchFF_Browser(){
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
+		return driver;
+		
+	}
+	
+	public void OpenWebApp(String urlName){
+		System.out.println("Enter " +urlname+ " in address bar");
+	
+		driver.get(urlName);
+	}
+	
+
+
+}

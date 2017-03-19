@@ -1,0 +1,31 @@
+package org.sel.quiz.tests;
+
+import org.openqa.selenium.WebDriver;
+import org.sel.quiz.pages.WebJoinerPage;
+import org.sel.quiz.utills.ApplicationClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+public class WebJoinerTest  extends ApplicationClass{ 
+	
+	public WebDriver driver;
+	public WebJoinerPage wp;
+	
+
+	@BeforeClass()
+	public void BeforeClassMethod(){
+		
+		wp = new WebJoinerPage(driver);	
+	
+	}
+	
+	@Test()
+	public void TestMethodOne() throws InterruptedException{
+		
+		wp.openJoinersApplication("https://staging.contactmanager.biz/ASGBI_Test/member-area/Web-Joiner/");
+		wp.selectMembershipProduct();
+		wp.setTitle();
+	}
+	
+}

@@ -1,0 +1,82 @@
+package org.sel.quiz.tests;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sel.quiz.pages.WebJoinerPage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+public class WebJoinerTest extends BaseTest{
+	
+	public WebJoinerPage wjp = null;
+	
+
+	@BeforeClass()
+	public void getJoinerURl() throws InterruptedException{
+	
+		driver.get("https://staging.contactmanager.biz/ASGBI_Test/member-area/Web-Joiner/");
+		Thread.sleep(4000);
+		String title = driver.getTitle();
+		System.out.println(title);
+		if(title.equalsIgnoreCase("Adxstudio Portals - Licensing")){
+			Thread.sleep(10000);
+			System.out.println("Reload refresh screen");
+			driver.navigate().refresh();
+		}
+	
+
+		
+	}
+	
+	@Test(description="This test case is used to create membership", priority=1)
+	public void registerforPaidMembeship() throws  Exception{
+		try{	
+		wjp.selectMembershipProduct();
+		wjp.setTitle();
+		wjp.setForename("Test");
+		String timeStamp = new SimpleDateFormat("HHmmss").format(new Date(System.currentTimeMillis()));
+		System.out.println(timeStamp);
+		wjp.setSurname("surname".concat(timeStamp));
+		wjp.selectGenderValue("Male");
+		wjp.setMobileNumber("1234567");
+		wjp.setWorkpostcode("EX8 2AB");
+		wjp.selectHospAddressFromPostCode();
+		wjp.setEmailId("vikash@3p.com");
+		wjp.setConfirmEmailId("vikash@3p.com");
+		wjp.setHospitalName("HSP Name");
+		wjp.setHospitalPostCode("CM1 2RR");
+		
+		wjp.setPrimaryInterest();
+		wjp.setPassword("123456");
+		wjp.setConfirmPassword("123456");
+		wjp.clickNextButton();
+		wjp.selectDonationAmt();
+		wjp.clickNextButton();
+		
+	}catch(Exception e){
+			throw new Exception(" Exception occured");
+		}
+	}
+		
+	
+			
+
+		
+	
+	@AfterClass()
+	public void verifyConfirmationScreen()
+	{
+		//driver.close();
+		
+	}
+	
+	
+	
+}

@@ -1,0 +1,43 @@
+package org.sel.quiz.tests;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sel.quiz.pages.WebJoinerPage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+public class WebJoinerTest extends BaseTest{
+
+	@BeforeClass()
+	public void getJoinerURl(){
+		
+	driver.get("https://staging.contactmanager.biz/ASGBI_Test/member-area/Web-Joiner/");
+	String title = driver.getTitle();
+	System.out.println(title);
+	if(title.equalsIgnoreCase("Adxstudio Portals - Licensing")){
+		System.out.println("Reload page");
+		driver.navigate().refresh();
+	}
+	
+		
+	}
+	
+	@Test()
+	public void test1(){
+		
+	}
+	
+	@AfterClass()
+	public void verifyConfirmationScreen()
+	{
+		driver.close();
+		
+	}
+	
+	
+	
+}

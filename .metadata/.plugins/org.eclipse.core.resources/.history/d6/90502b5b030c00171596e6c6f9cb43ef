@@ -1,0 +1,34 @@
+package org.sel.quiz.tests;
+
+import org.openqa.selenium.WebDriver;
+import org.sel.quiz.pages.WebJoinerPage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+public class WebJoinerTest extends BaseTest{
+
+	@BeforeClass()
+	public void getJoinerURl(){
+		
+	driver.get("https://staging.contactmanager.biz/ASGBI_Test/member-area/Web-Joiner/");		
+		
+		
+	}
+	
+	@Test()
+	public void test1(){
+		
+	}
+	
+	@AfterClass()
+	public void verifyConfirmationScreen()
+	{
+		driver.close();
+		
+	}
+	
+	
+	
+}

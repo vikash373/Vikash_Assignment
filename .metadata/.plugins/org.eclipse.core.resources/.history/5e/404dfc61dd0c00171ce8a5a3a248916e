@@ -1,0 +1,157 @@
+package org.sel.quiz.utills;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public  class SystemUtills {
+	
+	public String browserName;
+	public WebDriver driverforApplication;
+	private static Object firstHandle;
+	private static Object lastHandle;
+	
+	//Method to set up browser
+	public void fn_setDriverForApplication(String browser_Name){
+	
+		browserName=browser_Name;
+			
+	}
+	
+	//Method to set driver for application and launch respective browser based on browser type/name
+	public WebDriver fn_getDriverForApplication(){
+		
+		if(browserName.equalsIgnoreCase("firefox"))
+			return methodForFirefox();
+		else if(browserName.equalsIgnoreCase("chrome"))
+			return methodForChrome();
+		else
+			return methodForFirefox();
+			
+	}
+	
+	//Method to launch FireFox Browser
+	public WebDriver methodForFirefox(){
+		
+		driverforApplication = new FirefoxDriver();
+		driverforApplication.manage().window().maximize();
+		driverforApplication.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return driverforApplication;
+		
+	}
+	
+	//Method to launch Chrome Browser
+	public WebDriver methodForChrome(){
+		
+		System.setProperty("webdriver.chrome.driver","Library\\chromedriver.exe");
+		driverforApplication= new ChromeDriver();
+		driverforApplication.manage().window().maximize();
+		driverforApplication.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		return driverforApplication;
+		
+	}
+	
+	
+	//Generic method to input value in text input field
+	public static void fn_inputValues(WebElement we, String inputtext){
+		
+		if(we.isDisplayed()){
+			if(we.isEnabled()){
+				we.sendKeys(inputtext);
+				System.out.println("Entered text "+inputtext+" in edit box");
+			}
+			else
+				System.out.println("Element is not enabled");
+		}
+		else
+				System.out.println("Element is not displayed");
+		}
+		
+	//Generic method to select value from drop-down by visible text
+	public static void fn_selectValueByText(WebElement we, String selectValue){
+		
+		if(we.isDisplayed()){
+			if(we.isEnabled()){	
+				Select SelObj= new Select(we);
+				SelObj.selectByVisibleText(selectValue);
+		}
+		else
+				System.out.println("Element is not enabled");
+		}
+		else
+				System.out.println("Element is not displayed");
+	}
+	
+	//Generic method to click on button using WebDriver click
+	public static void fn_clickOnButton(WebElement we){
+			
+		if(we.isDisplayed()){
+				if(we.isEnabled()){	
+					we.click();
+			}
+			else
+				System.out.println("Element is not enabled");
+		}
+		else
+				System.out.println("Element is not displayed");
+		}
+	
+	
+	//Generic Method to Select radio button options
+	public static void fn_SelectRadioButton(WebElement element, String valueToSelect) {
+		
+		List<WebElement> allOptions = element.findElements(By.tagName("input"));
+		for (WebElement option : allOptions) {
+			   System.out.println("Option value "+option.getText());
+			        if (valueToSelect.equals(option.getText())) {
+			            option.click();
+			            break;
+			        }
+			    }
+	}
+	
+	public static void switchToWindowsPopup(WebDriver driver) {
+		
+		Set<String> winhandles = driver.getWindowHandles();
+	    Iterator<String> itr = winhandles.iterator();
+	    firstHandle = itr.next();
+	    lastHandle = firstHandle;
+	    while (itr.hasNext()) {
+	    lastHandle = itr.next();
+	    }
+	    driver.switchTo().window(lastHandle.toString());
+	    System.out.println("Switching window id is-->"+driver.getWindowHandle());
+	}
+	
+	public static void switchToMainWindow(WebDriver driver) {
+	    
+		driver.switchTo().window(firstHandle.toString());
+	    
+	}
+	
+	
+	//Generic method to switch to an iframe
+	public static void fn_switchToIFrame(WebElement we, WebDriver driver) {
+		
+		driver.switchTo().frame(we);
+			
+			
+		}
+		
+		//Generic method to switch to parent iframe
+	public static void fn_switchToParentFrame(WebElement we, WebDriver driver) {
+			
+				driver.switchTo().parentFrame();
+		}
+		
+
+	
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite1]">
+  <parameter name="browserName" value="chrome"/>
+  <test name="Test1(failed)">
+    <classes>
+      <class name="org.sel.quiz.tests.SignInTest">
+        <methods>
+          <include name="AfterClass"/>
+          <include name="closeAllDriverInstance"/>
+          <include name="BeforeClassMethod"/>
+          <include name="clickLogInButton"/>
+          <include name="browserSetup"/>
+        </methods>
+      </class> <!-- org.sel.quiz.tests.SignInTest -->
+      <class name="org.sel.quiz.tests.WebJoinerTest">
+        <methods>
+          <include name="verifyHomeScreenOfJoinerApp"/>
+          <include name="beforeclassMethod"/>
+          <include name="registerforPaidMembeship"/>
+        </methods>
+      </class> <!-- org.sel.quiz.tests.WebJoinerTest -->
+    </classes>
+  </test> <!-- Test1(failed) -->
+</suite> <!-- Failed suite [Suite1] -->

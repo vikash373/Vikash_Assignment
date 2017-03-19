@@ -1,0 +1,474 @@
+package org.sel.quiz.pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sel.quiz.utills.SystemUtills;
+
+
+public class WebJoinerPage  {
+	
+	public WebDriver driver;
+	
+	/* Web Elements */
+	
+	@FindBy(xpath=".//*[@id='productList']/tbody/tr[1]/td/input[2]")
+	protected WebElement productListOption;
+
+	@FindBy(id="NextButton")
+	protected WebElement nextButton;
+	
+	@FindBy(xpath=".//*[@id='EntityFormView']/div[2]/div[1]/div/fieldset[1]/table/tbody/tr[1]/td[1]/div[2]/div[1]/div/button[2]")
+	protected WebElement titleLookupButton;
+	
+	@FindBy(xpath=".//*[@id='EntityFormView']/div[2]/div[2]/div/fieldset/table/tbody/tr[12]/td[1]/div[2]/div[1]/div/button[2]")
+	protected WebElement pinterestLookupButton;
+	
+	@FindBy(className="modal-content")
+	protected WebElement modalDialog;
+	
+	@FindBy(xpath=".//button[text()='Select']")
+	protected WebElement modalSaveButton;
+	
+	@FindBy(id="de_surname")
+	protected WebElement surnameEditbox;
+	
+	@FindBy(id="de_forename")
+	protected WebElement forenameEditbox;
+	
+	@FindBy(xpath="//td[text()='Dr']")
+	protected WebElement titleText;
+	
+	@FindBy(xpath="//*[@id='de_subclassification1_ref_lookupmodal']/div/section/div/div/div[2]/div[2]/div[2]/table/tbody/tr[1]/td[2]")
+	protected WebElement pInterestText;
+	
+	@FindBy(xpath=".//*[@id='de_subclassification1_ref_lookupmodal']/div/section/div/div/div[3]/button[1]")
+	protected WebElement modalSaveButton2;
+	
+	@FindBy(id="de_contactgender")
+	protected WebElement genderOptions;
+	
+	@FindBy(id="de_honours")
+	protected WebElement qualificationEditbox;
+	
+	@FindBy(id="de_mobile")
+	protected WebElement mobileEditbox;
+	
+	@FindBy(id="de_postcode")
+	protected WebElement workpostcodeEditbox;
+	
+	@FindBy(id="btnHospitalAddr_Postcode")
+	protected WebElement workPostcodeButton;
+		
+	@FindBy(id="de_completeaddress")
+	protected WebElement workaddressTextArea;
+	
+	@FindBy(id="de_town")
+	protected WebElement workTownEditBox;
+	
+	@FindBy(id="de_county")
+	protected WebElement workCountyEditBox;
+	
+	@FindBy(id="de_email")
+	protected WebElement emailEditbox;
+	
+	@FindBy(id="de_confirmemail")
+	protected WebElement confirmemailEditbox;
+		
+	@FindBy(id="de_address")
+	protected WebElement hospitalNameEditbox;
+	
+	@FindBy(id="de_address2_postcode")
+	protected WebElement hospitalPostCodeEditbox;
+	
+	@FindBy(id="findaddress")
+	protected WebElement lookupButton1;
+	
+	@FindBy(id="de_address2_completeaddress")
+	protected WebElement hospitalAddressEditbox;
+	
+	@FindBy(id="de_address2_town")
+	protected WebElement hospitalTownEditbox;
+	
+	@FindBy(id="de_address2_county")
+	protected WebElement hospitalCountyEditbox;
+			
+	@FindBy(id="de_customPassword")
+	protected WebElement passwordEditbox;
+	
+	@FindBy(xpath="//input[@id='rdbListDonationAmount_2' and @value=10]")
+	protected WebElement radioOption;
+		
+	@FindBy(id="de_customConfirmPassword")
+	protected WebElement confirmpasswordEditbox;
+		
+	@FindBy(id="OrderPaymentIframe")
+	protected WebElement orderpaymentIframe;
+	
+	@FindBy(id="sagepayCcIframe")
+	protected WebElement sagepayIframe;
+	
+	@FindBy(id="form-card_details.field-pan")
+	protected WebElement accountnumberEditbox;
+	
+	@FindBy(id="form-card_details.field-expiry_mm")
+	protected WebElement expMonthEditbox;
+	
+	@FindBy(id="form-card_details.field-expiry_yy")
+	protected WebElement expYearEditbox;
+	
+	@FindBy(id="form-card_details.field-cvc")
+	protected WebElement cvvEditbox;
+	
+	@FindBy(xpath=".//button[@value='proceed']")
+	protected WebElement confircarddetailsButton;
+	
+	@FindBy(xpath=".//*[@id='addressList']/tbody/tr[1]/td/a")
+	protected WebElement hospaddressSelect;
+	
+	//Home Address Look-up button
+	@FindBy(id="btnHospitalAddr_Postcode")
+	WebElement lookupButton2;
+	
+
+	
+	
+	public WebJoinerPage(WebDriver driver){
+		this.driver=driver;		
+		PageFactory.initElements(driver, WebJoinerPage.class);
+	}
+	/*
+	public void openJoinersApplication(String joinersURL) throws InterruptedException{
+							
+			driver.get(joinersURL);							
+			Thread.sleep(7000);
+			String a = driver.getTitle();
+			if(a.contains("Adxstudio Portals - Licensing")){
+			Thread.sleep(11000);
+			driver.navigate().refresh();
+			}
+			else
+				System.out.println("Succssfully Loaded Joiners Home page "+a+".");
+				
+	}*/
+	
+	public boolean verifyHomePage(){
+		return driver.getTitle().startsWith("Web Joiner");
+				
+	}
+		
+	public WebJoinerPage selectMembershipProduct() throws InterruptedException, Exception {
+		try{
+		productListOption.click();
+		nextButton.click();
+		Thread.sleep(5000);
+		return this;
+		}catch(Exception e){
+			throw new Exception("Membership product is not found");
+		}
+		
+				
+	}
+	
+	// Example of explicit wait
+	public WebJoinerPage setTitle() throws InterruptedException{
+					
+			titleLookupButton.click();
+			WebDriverWait  block = new WebDriverWait(driver,15);
+			WebElement  modal = block.until(ExpectedConditions.visibilityOf(modalDialog));
+			Thread.sleep(5000);
+			titleText.click();
+			Thread.sleep(2000);
+			modalSaveButton.click();
+			Thread.sleep(3000);
+			return this;	
+		
+	}
+	
+	
+	public WebJoinerPage setPrimaryInterest() throws InterruptedException {
+			
+			pinterestLookupButton.click();
+			WebDriverWait  block = new WebDriverWait(driver,15);
+			WebElement  modal = block.until(ExpectedConditions.visibilityOf(modalDialog));
+			Thread.sleep(5000);
+			pInterestText.click();
+			Thread.sleep(2000);
+			modalSaveButton2.click();
+			Thread.sleep(3000);
+			return this;
+			
+		
+	}
+	
+	
+	
+	public WebJoinerPage setForename(String forename) throws Exception {
+		try{
+			System.out.println("Input forename");
+			SystemUtills.fn_inputValues(forenameEditbox, forename);
+			return this;
+		}
+		catch(Exception e){
+			throw new Exception("Forename field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage setSurname(String surname) throws Exception {
+		try{
+			System.out.println("Input surname");
+			SystemUtills.fn_inputValues(surnameEditbox, surname);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Surname field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage selectGenderValue(String genderValue) throws Exception {
+		try{
+			SystemUtills.fn_selectValueByText(genderOptions, genderValue);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Gender field is not found");
+		}
+	}
+	
+	public WebJoinerPage setMobileNumber(String mobileNumber) throws Exception {
+		try{
+			SystemUtills.fn_inputValues(mobileEditbox, mobileNumber);
+			return this;
+		}catch(Exception e){
+			throw new Exception("MobileNumber field is not found");
+		}
+	}
+	
+	public WebJoinerPage setWorkpostcode(String workpostcode) throws Exception {
+		try{
+			System.out.println("Input Workpostcode");
+			SystemUtills.fn_inputValues(workpostcodeEditbox, workpostcode);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Workpostcode field is not found");
+		}
+	}
+	
+	public WebJoinerPage setWorkAddress(String workAddress) throws Exception {
+		try{
+			System.out.println("Input WorkAddress");
+			SystemUtills.fn_inputValues(workaddressTextArea, workAddress);
+			return this;
+		}catch(Exception e){
+			throw new Exception("WorkAddress field is not found");
+		}
+	}
+	
+	public WebJoinerPage setWorkTown(String workTown) throws Exception {
+		try{
+			System.out.println("Input workTown");
+			SystemUtills.fn_inputValues(workTownEditBox, workTown);
+			return this;
+		}catch(Exception e){
+			throw new Exception("workTown field is not found");
+		}
+	}
+	
+	public WebJoinerPage setWorkCounty(String workCounty) throws Exception {
+		try{
+			System.out.println("Input workCounty");
+			SystemUtills.fn_inputValues(workCountyEditBox, workCounty);
+			return this;
+		}catch(Exception e){
+			throw new Exception("workCounty field is not found");
+		}
+	}
+	
+	public WebJoinerPage setEmailId(String emailText) throws Exception {
+		try{
+			System.out.println("Input Email address");
+			SystemUtills.fn_inputValues(emailEditbox, emailText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Email address field is not found");
+		}
+	}
+	
+	public WebJoinerPage setConfirmEmailId(String confirmemailText) throws Exception {
+		try{
+			System.out.println("Input Confirm Email address");
+			SystemUtills.fn_inputValues(confirmemailEditbox, confirmemailText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Confirm EmailEditbox field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage setHospitalName(String hospitalNameText) throws Exception {
+		try{
+			System.out.println("Input Hospital Name ");
+			SystemUtills.fn_inputValues(hospitalNameEditbox, hospitalNameText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Hospital Name field is not found");
+		}
+	}
+	
+	public WebJoinerPage setHospitalPostCode(String hospitalPostCodeText) throws Exception {
+		try{
+			System.out.println("Input Hospital Postcode ");
+			SystemUtills.fn_inputValues(hospitalPostCodeEditbox, hospitalPostCodeText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Hospital Post code field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage setHospitalAddress(String hospitalAddressText) throws Exception {
+		try{
+			System.out.println("Input Hospital Address");
+			SystemUtills.fn_inputValues(hospitalAddressEditbox, hospitalAddressText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Hospital Address field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage setHospitalTown(String hospitalTownText) throws Exception {
+		try{
+			System.out.println("Input Hospital Town ");
+			SystemUtills.fn_inputValues(hospitalTownEditbox, hospitalTownText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Hospital town field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage setHospitalCounty(String hospitalCountyText) throws Exception {
+		try{
+			System.out.println("Input Hospital County ");
+			SystemUtills.fn_inputValues(hospitalCountyEditbox, hospitalCountyText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Hospital County field is not found");
+		}
+	}
+	
+	public WebJoinerPage setPassword(String passwordText) throws Exception {
+		try{
+			System.out.println("Input password ");
+			SystemUtills.fn_inputValues(passwordEditbox, passwordText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("password field is not found");
+		}
+	}
+	
+	public WebJoinerPage setConfirmPassword(String confirmpasswordText) throws Exception {
+		try{
+			System.out.println("Input confirm password ");
+			SystemUtills.fn_inputValues(confirmpasswordEditbox, confirmpasswordText);
+			return this;
+		}catch(Exception e){
+			throw new Exception("Confirm password field is not found");
+		}
+	}
+	
+	
+	public WebJoinerPage selectDonationAmt() throws Exception, InterruptedException{
+		try{
+		System.out.println("Click on Radio button");
+		radioOption.click();
+		Thread.sleep(5000);
+		return this;
+		}catch(Exception e){
+			throw new Exception(e.getMessage());
+		}
+				
+	}
+	
+	/*public WebJoinerPage selectDynamicDonationAmt(String valueToSelect) throws Exception, InterruptedException{
+		try{
+		System.out.println("Click on Radio button");
+		SystemUtills.fn_SelectRadioButton(radioOption2, valueToSelect);
+		Thread.sleep(5000);
+		return this;
+		}catch(Exception e){
+			throw new Exception(e.getMessage());
+		}
+				
+	}
+	*/
+	
+	
+	
+	/*
+	
+	public WebJoinerPage addPaymentdetails()throws Exception, InterruptedException{
+		try{
+		System.out.println("Click on Procced with Payments");
+		SystemUtills.fn_switchToIFrame(orderpaymentIframe);
+		Thread.sleep(1000);
+		SystemUtills.fn_switchToIFrame(sagepayIframe);
+		Thread.sleep(1000);
+		accountnumberEditbox.sendKeys("5404000000000001");
+		expMonthEditbox.sendKeys("12");
+		expYearEditbox.sendKeys("21");
+		cvvEditbox.sendKeys("123");
+		confircarddetailsButton.click();
+		Thread.sleep(20000);
+		return this;
+		
+		}catch(Exception e){
+			throw new Exception(e.getMessage());
+		}
+	
+	*/
+		public WebJoinerPage selectHospAddressFromPostCode() throws Exception {
+			try{
+				SystemUtills.fn_clickOnButton(lookupButton1);
+				SystemUtills.switchToWindowsPopup(driver);
+				hospaddressSelect.click();
+				SystemUtills.switchToMainWindow(driver);
+				return this;
+			}catch(Exception e){
+				throw new Exception("Unable to select address from Post code look-up");
+			}
+			
+		}
+		
+		public WebJoinerPage selectHomeAddressFromPostCode() throws Exception {
+			try{
+				SystemUtills.fn_clickOnButton(lookupButton2);
+				SystemUtills.switchToWindowsPopup(driver);
+				hospaddressSelect.click();
+				SystemUtills.switchToMainWindow(driver);
+				return this;
+			}catch(Exception e){
+				throw new Exception("Unable to select address from Post code look-up");
+			}
+			
+		}
+
+
+		public WebJoinerPage clickNextButton() throws Exception, InterruptedException{
+			try{
+			System.out.println("Click on Next button");
+			nextButton.click();
+			Thread.sleep(5000);
+			return this;
+			}catch(Exception e){
+				throw new Exception(e.getMessage());
+			}
+					
+		}
+	
+
+}

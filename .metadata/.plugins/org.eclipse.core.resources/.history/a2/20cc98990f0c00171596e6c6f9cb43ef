@@ -1,0 +1,93 @@
+package org.sel.quiz.tests;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sel.quiz.pages.WebJoinerPage;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+public class WebJoinerTest extends BaseTest{
+	
+	public WebJoinerPage wjp = null;
+	
+
+	@BeforeClass()
+	public void getJoinerURl() throws InterruptedException{
+		String timeStamp = new SimpleDateFormat("HHmmss").format(new Date(System.currentTimeMillis()));
+		System.out.println(timeStamp);
+	driver.get("https://staging.contactmanager.biz/ASGBI_Test/member-area/Web-Joiner/");
+	Thread.sleep(4000);
+	String title = driver.getTitle();
+	System.out.println(title);
+	if(title.equalsIgnoreCase("Adxstudio Portals - Licensing")){
+		Thread.sleep(10000);
+		System.out.println("Reload refresh screen");
+		driver.navigate().refresh();
+	}
+	//wjp = new WebJoinerPage(driver);
+
+		
+	}
+	
+		@Test(description="This test case is used to create membership", priority=2)
+		public void registerforPaidMembeship() throws  InterruptedException{
+			/*
+			
+			wjp.selectMembershipProduct();
+			wjp.setTitle();
+			wjp.setForename("Test");
+			String timeStamp = new SimpleDateFormat("HH.mm.ss").format(new Date(System.currentTimeMillis()));
+			System.out.println(timeStamp);
+	
+	
+			wjp.setSurname("User"+timeStamp);
+			wjp.selectGenderValue(webjoiner.Gender);
+			wjp.setMobileNumber(webjoiner.Mobile);
+			wjp.setWorkpostcode(webjoiner.workPostcode);
+			wjp.selectHospAddressFromPostCode();
+			wjp.setWorkAddress(webjoiner.workAddress);
+			wjp.setWorkTown(webjoiner.workTown);
+			wjp.setWorkCounty(webjoiner.workCounty);
+			wjp.setEmailId(webjoiner.Email);
+			wjp.setConfirmEmailId(webjoiner.confirmEmail);
+			wjp.setHospitalName(webjoiner.HospitalName);
+			wjp.setHospitalPostCode(webjoiner.HospitalPostCode);
+			wjp.setHospitalAddress(webjoiner.HospitalAddress);
+			wjp.setHospitalTown(webjoiner.HospitalTown);
+			wjp.setHospitalCounty(webjoiner.HospitalCounty);
+			wjp.setPrimaryInterest();
+			wjp.setPassword(webjoiner.Password);
+			wjp.setConfirmPassword(webjoiner.confirmPassword);
+			wjp.clickNextButton();
+			wjp.selectDonationAmt();
+			wjp.clickNextButton();
+			wjp.addPaymentdetails();
+			Thread.sleep(6000);
+			wjp.clickNextButton();
+			
+			Assert.assertTrue(wjp.verifyConfirmationText(), "Something went wrong confirmation screen not shown");
+			
+			Thread.sleep(2000);
+			//wjp.registerForMembershipSubscriptionStep3();
+			
+		}
+		*/
+	}
+	
+	@AfterClass()
+	public void verifyConfirmationScreen()
+	{
+		//driver.close();
+		
+	}
+	
+	
+	
+}

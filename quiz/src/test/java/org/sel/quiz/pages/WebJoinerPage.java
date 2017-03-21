@@ -12,16 +12,24 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.sel.quiz.OR.WebJoinerPageOR;
 import org.sel.quiz.utills.SystemUtills;
 
 import com.google.common.base.Function;
 
 
-public class WebJoinerPage  {
+public class WebJoinerPage extends WebJoinerPageOR {
 	
-	public WebDriver driver;
 	
+	//public WebDriver driver;
+	
+	public WebJoinerPage(WebDriver driver) {
+		super(driver);
+		// TODO Auto-generated constructor stub
+	}
+
 	/* Web Elements */
+	/*
 	
 	@FindBy(xpath=".//*[@id='productList']/tbody/tr[1]/td/input[2]")
 	WebElement productListOption;
@@ -156,7 +164,7 @@ public class WebJoinerPage  {
 		this.driver=driver;		
 		PageFactory.initElements(driver, this);
 	}
-	
+	*/
 	//Launch Joiner Application
 	public void openJoinersApplication(String joinersURL) throws InterruptedException{
 							
@@ -206,16 +214,19 @@ public class WebJoinerPage  {
 	
 	//Method to verify Title of the page
 	public boolean verifyHomePage(String joinerTitleInitials){
-		return driver.getTitle().startsWith(joinerTitleInitials);
+		
+			return driver.getTitle().startsWith(joinerTitleInitials);
 				
 	}
 		
 	public WebJoinerPage selectMembershipProduct() throws InterruptedException, Exception {
 		try{
-		productListOption.click();
+		WebDriverWait  block = new WebDriverWait(driver,20);
+		block.until(ExpectedConditions.visibilityOf(productListOption)).click();
+	//	productListOption.click();
 		SystemUtills.fn_clickOnButton(nextButton);
-		//nextButton.click();
 		Thread.sleep(5000);
+		SystemUtills.fn_captureScreenshot(driver, "Screenshots");
 		return this;
 		}catch(Exception e){
 			throw new Exception("Membership product is not found");

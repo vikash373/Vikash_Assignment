@@ -1,11 +1,18 @@
 package org.sel.quiz.utills;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -152,6 +159,23 @@ public  class SystemUtills {
 				driver.switchTo().parentFrame();
 		}
 		
+	//Method to capture screenshot
+	public static void fn_captureScreenshot(WebDriver driver, String screenshotName) throws IOException{
+		
+			TakesScreenshot ts=(TakesScreenshot)driver;
+			File src = ts.getScreenshotAs(OutputType.FILE);
+			String timeStamp = new SimpleDateFormat("HHmmss").format(new Date(System.currentTimeMillis()));
+			String dest = "Screenshots\\"+screenshotName+""+timeStamp+".png";
+			File destination = new File(dest);
+			FileUtils.copyFile(src, destination);
+			System.out.println("Screenshot Taken");
+			
+		
+		/*catch(Exception e){
+			System.out.println("Exception while taking screenshot");
+			return e.getMessage();
+			} */
+	}
 
 	
 }

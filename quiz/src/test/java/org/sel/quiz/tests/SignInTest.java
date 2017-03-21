@@ -14,20 +14,15 @@ import org.testng.annotations.Test;
 
 public class SignInTest extends BaseTest {
 	
-	private GmailSignInPage gsip = null;
+	public GmailSignInPage gsip = null;
 	
 	
 	
 	@BeforeClass()
 	public void BeforeClassMethod() throws Exception{
 		
-		try{
 			gsip = new GmailSignInPage(driver);
 			gsip.openJoinersApplication("https://gmail.com");
-			}
-			catch(Exception e){
-				throw new Exception(e.getMessage());
-			}
 		
 		}
 		
@@ -35,7 +30,7 @@ public class SignInTest extends BaseTest {
 	
 	//Fetch Title of Gmail Page 
 	
-	@Test(priority=1)
+	@Test(priority=3)
 	public void verifyGmailPageTitle() throws InterruptedException{
 	
 		Assert.assertTrue(gsip.verifyTitle("Gmail"), "Sorry you seems on other page...!!!");
@@ -44,7 +39,7 @@ public class SignInTest extends BaseTest {
 	
 	
 	//Click on SignIN Button using Absolute & Relative Xpaths of SignIN Button
-	@Test(priority=2)
+	@Test(priority=4)
 	public void clickLogInButton() throws InterruptedException,Exception{
 		try{
 		gsip.setEmailId("vikash.yadav@3pillarglobal.com");
@@ -60,7 +55,7 @@ public class SignInTest extends BaseTest {
 	
 	
 	
-	@AfterMethod()
+	@AfterClass()
 	public void AfterClass(){
 		driver.close();
 		

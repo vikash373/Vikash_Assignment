@@ -3,6 +3,7 @@ package org.sel.quiz.tests;
 import org.openqa.selenium.WebDriver;
 import org.sel.quiz.utills.SystemUtills;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -13,7 +14,7 @@ public class BaseTest {
 		
 			
 	@Parameters("browserName")
-	@BeforeSuite(alwaysRun=true)
+	@BeforeClass(alwaysRun=true)
 	public  void browserSetup(@Optional String browserType) {
 			if(browserType!=null && !browserType.isEmpty()){
 				SystemUtills sysu = new SystemUtills();
@@ -22,10 +23,12 @@ public class BaseTest {
 				}	
 	}
 	
+	/*
 	@AfterSuite(alwaysRun=true)
 	public void closeAllDriverInstance(){
 		driver.quit();
 	}
+	*/
 	
 	
 

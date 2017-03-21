@@ -47,6 +47,7 @@ public class SignInTest extends BaseTest {
 		gsip.setPassword();
 		//gsip.clickSignInButtonAbsolute();
 		gsip.clickSignInButtonRelative();	
+		SystemUtills.fn_captureScreenshot(driver, "GmailScreenshot");
 		} catch(Exception e){
 			throw new Exception(e.getMessage());
 		}

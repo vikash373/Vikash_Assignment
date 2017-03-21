@@ -46,6 +46,7 @@ public class WebJoinerTest extends BaseTest{
 		wjp.clickonTermAndConditionLink();
 		wjp.selectMembershipProduct();
 		wjp.setTitle();
+		/*
 		wjp.setForename("Test");
 		String timeStamp = new SimpleDateFormat("HHmmss").format(new Date(System.currentTimeMillis()));
 		System.out.println(timeStamp);
@@ -66,7 +67,7 @@ public class WebJoinerTest extends BaseTest{
 		wjp.setConfirmPassword("123456");
 		wjp.clickNextButton();
 		wjp.selectDonationAmt();
-		wjp.clickNextButton();
+		wjp.clickNextButton(); */
 		//wjp.addPaymentdetails("5404000000000001", "12", "21", "123");
 		
 		//Assert.assertTrue(wjp.verifyConfirmationText(), "Something went wrong confirmation screen not shown");
